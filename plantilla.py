@@ -21,7 +21,7 @@ class Enemy(pygame.sprite.Sprite):
 
     ###    def __init__(self):
     ###        super(Enemy, self).__init__()
-    ###        self.surf = image1
+    ###        self.surf = BUGpng_scaled
     ###        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
     ###
     # la posicion inicial es generada aleatoriamente, al igual que la velocidad
@@ -51,9 +51,9 @@ class Player(pygame.sprite.Sprite):
     ### def __init__(self):
     ###        # nos permite invocar métodos o atributos de Sprite
     ###    super(Player, self).__init__()
-    ###    imageNotScaled = pygame.image.load('JorgeVJ.png')
-    ###    Jorge = pygame.transform.scale(imageNotScaled, (80, 80))
-    ###    self.surf = Jorge
+    ###
+    ###
+    ###    self.surf = JorgePNG_scaled
     ###    self.surf.set_colorkey((0, 0, 0), RLEACCEL)
     ###    self.rect = self.surf.get_rect()
 
