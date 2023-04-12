@@ -100,7 +100,6 @@ SCREEN_HEIGHT = 700
 screen = None
 ### background_image = pygame.image.load("pixelBackground.jpg").convert()
 background_image = None
-### screen.blit(background_image, [0, 0])
 
 ''' Preparamos el gameloop '''
 ''' 1.- creamos el reloj del juego'''
@@ -123,6 +122,7 @@ ADDENEMY = None
 ### runing = True
 
 ### while running:
+###     screen.blit(background_image, [0, 0])
 # iteramos sobre cada evento en la cola
 ### 	for event in pygame.event.get():
 # se presiono una tecla?
@@ -140,6 +140,7 @@ ADDENEMY = None
 ### 			new_enemy = Enemy()
 ### 			enemies.add(new_enemy)
 ### 			all_sprites.add(new_enemy)
+
 
 
 
