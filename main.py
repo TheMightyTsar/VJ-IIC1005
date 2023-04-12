@@ -37,8 +37,8 @@ pygame.init()
 
 ''' Creamos y editamos la ventana de pygame (escena) '''
 ''' 1.-definir el tamaño de la ventana'''
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 700
+SCREEN_WIDTH = None   # revisar ancho de la imagen de fondo
+SCREEN_HEIGHT = None  # revisar alto de la imagen de fondo
 
 ''' 2.- crear el objeto pantalla'''
 screen = None
@@ -53,7 +53,10 @@ clock = None
 ADDENEMY = None
 
 ''' 3.- creamos la instancia de jugador'''
+player = None
 
 ''' 4.- contenedores de enemigos y jugador'''
+enemies = None
+all_sprites = None
 
 ''' hora de hacer el gameloop '''

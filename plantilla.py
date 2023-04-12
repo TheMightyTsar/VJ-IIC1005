@@ -100,6 +100,7 @@ SCREEN_HEIGHT = 700
 screen = None
 ### background_image = pygame.image.load("pixelBackground.jpg").convert()
 background_image = None
+### screen.blit(background_image, [0, 0])
 
 ''' Preparamos el gameloop '''
 ''' 1.- creamos el reloj del juego'''
@@ -140,7 +141,6 @@ ADDENEMY = None
 ### 			enemies.add(new_enemy)
 ### 			all_sprites.add(new_enemy)
 
-### 	screen.blit(background_image, [0, 0])
 
 
 # dibujamos todos los sprites
