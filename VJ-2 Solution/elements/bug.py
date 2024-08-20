@@ -15,7 +15,7 @@ class Enemy(pygame.sprite.Sprite):
         # nos permite invocar métodos o atributos de Sprite
         super(Enemy, self).__init__()
         self.surf = BUGpng_scaled
-        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
+        # // self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         # la posicion inicial es generada aleatoriamente, al igual que la velocidad
         self.rect = self.surf.get_rect(
             center=(
@@ -24,6 +24,9 @@ class Enemy(pygame.sprite.Sprite):
             )
         )
         self.speed = random.randint(3, 5)
+
+        # * Se crea una mascara para la colision
+        self.mask = pygame.mask.from_surface(self.surf)
 
 
     def update(self):

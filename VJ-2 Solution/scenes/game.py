@@ -65,7 +65,11 @@ def gameLoop():
         player.projectiles.update()
         enemies.update()
         
-        if pygame.sprite.spritecollideany(player, enemies):
+        # // if pygame.sprite.spritecollideany(player, enemies):
+        # //     player.kill()
+        # //     running = False
+        # * Se verifica si la mascara del jugador colisiona con la mascara de los enemigos
+        if pygame.sprite.spritecollideany(player, enemies, pygame.sprite.collide_mask):
             player.kill()
             running = False
         

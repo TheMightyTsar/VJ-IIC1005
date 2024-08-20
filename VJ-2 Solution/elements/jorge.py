@@ -17,11 +17,14 @@ class Player(pygame.sprite.Sprite):
         # nos permite invocar métodos o atributos de Sprite
         super(Player, self).__init__()
         self.surf = JorgePNG_scaled
-        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
+        # // self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         self.rect = self.surf.get_rect()
         self.screen_width = SCREEN_WIDTH
         self.screen_height = SCREEN_HEIGHT
         self.projectiles = pygame.sprite.Group()
+
+        # * Se crea una mascara para la colision
+        self.mask = pygame.mask.from_surface(self.surf)
 
     def update(self, pressed_keys):
         if pressed_keys[K_UP]:
