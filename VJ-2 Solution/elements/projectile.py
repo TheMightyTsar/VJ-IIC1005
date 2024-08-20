@@ -6,7 +6,7 @@ class Projectile(pygame.sprite.Sprite):
         self.surf = pygame.Surface((10, 10))
         self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect(center=pos)
-        self.speed = 10
+        self.speed = 20
         self.direction = direction
         self.screen_width = SCREEN_WIDTH
         self.screen_height = SCREEN_HEIGHT
