@@ -5,7 +5,6 @@ este modulo manejara la creacion y movimiento de Jorge
 import pygame
 from pygame.locals import (
     K_UP, K_DOWN, K_LEFT, K_RIGHT, RLEACCEL)
-import math
 from elements.projectile import Projectile
 
 
@@ -47,9 +46,10 @@ class Player(pygame.sprite.Sprite):
     
     def shoot(self, mouse_pos):
         #* Calcula la dirección del proyectil
-        direction = (mouse_pos[0] - self.rect.centerx, mouse_pos[1] - self.rect.centery)
-        length = math.hypot(*direction)
-        direction = (direction[0] / length, direction[1] / length)
+        x_distance = mouse_pos[0] - self.rect.centerx
+        y_distance = mouse_pos[1] - self.rect.centery
+        length = ((mouse_pos[0] - self.rect.centerx)**2 + (mouse_pos[1] - self.rect.centery)**2)**(1/2)
+        direction = (x_distance / length, y_distance / length)
         #* Crea un proyectil en la posición del jugador
         projectile = Projectile(self.rect.center, direction, self.screen_width, self.screen_height)
         self.projectiles.add(projectile)
