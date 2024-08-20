@@ -69,6 +69,9 @@ def gameLoop():
             player.kill()
             running = False
         
+        #* Si un proyectil golpea a un enemigo, el proyectil y el enemigo mueren
+        pygame.sprite.groupcollide(player.projectiles, enemies, True, True)
+        
         pygame.display.flip()
         
         # iteramos sobre cada evento en la cola
