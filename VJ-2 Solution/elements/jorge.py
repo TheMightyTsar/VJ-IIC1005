@@ -21,6 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.screen_width = SCREEN_WIDTH
         self.screen_height = SCREEN_HEIGHT
         self.projectiles = pygame.sprite.Group()
+        self.facing_right = True
 
     def update(self, pressed_keys):
         if pressed_keys[K_UP]:
@@ -29,8 +30,14 @@ class Player(pygame.sprite.Sprite):
             self.rect.move_ip(0, 4)
         if pressed_keys[K_LEFT]:
             self.rect.move_ip(-4, 0)
+            if self.facing_right:
+                self.surf = pygame.transform.flip(self.surf, True, False)
+                self.facing_right = False
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(4, 0)
+            if not self.facing_right:
+                self.surf = pygame.transform.flip(self.surf, True, False)
+                self.facing_right = True
         
         if self.rect.left < 0:
             self.rect.left = 0
