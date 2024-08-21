@@ -78,7 +78,7 @@ def gameLoop():
         cursor_img_rect.center = pygame.mouse.get_pos()
         screen.blit(cursor_img, cursor_img_rect)
         
-        if pygame.sprite.spritecollideany(player, enemies):
+        if pygame.sprite.spritecollideany(player, enemies, pygame.sprite.collide_mask):
             player.kill()
             running = False
         
