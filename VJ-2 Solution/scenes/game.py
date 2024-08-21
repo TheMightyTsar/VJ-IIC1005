@@ -5,26 +5,15 @@ este modulo manejara la escena donde ocurre nuestro juego
 
 import pygame
 
-from pygame.locals import (K_ESCAPE, KEYDOWN, QUIT, RLEACCEL)
+from pygame.locals import (K_ESCAPE, KEYDOWN, QUIT)
 
 from elements.jorge import Player
 
 from elements.bug import Enemy
 
-
-def gameLoop():
-    ''' iniciamos los modulos de pygame'''
-
-    pygame.init()
-    pygame.mixer.init()
-
-    ''' Creamos y editamos la ventana de pygame (escena) '''
-    ''' 1.-definir el tamaño de la ventana'''
-    SCREEN_WIDTH = 1000
-    SCREEN_HEIGHT = 700
-
-    ''' 2.- crear el objeto pantalla'''
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+#* Ahora gameloop recibe screen y las dimensiones de la pantalla
+def gameLoop(screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+    ''' cargar el fondo'''
     background_image = pygame.image.load("assets/pixelBackground.jpg").convert()
 
     ''' Preparamos el gameloop '''
@@ -67,16 +56,13 @@ def gameLoop():
         for projectile in player.projectiles:
             screen.blit(projectile.surf, projectile.rect)
         
-        pressed_keys = pygame.key.get_pressed()
-        player.update(pressed_keys)
-        
-        #* Actualiza los proyectiles
-        player.projectiles.update()
-        enemies.update()
-        
         #* Dibuja el cursor del mouse
         cursor_img_rect.center = pygame.mouse.get_pos()
         screen.blit(cursor_img, cursor_img_rect)
+        
+        pressed_keys = pygame.key.get_pressed()
+        player.update(pressed_keys)
+        enemies.update()
         
         if pygame.sprite.spritecollideany(player, enemies, pygame.sprite.collide_mask):
             player.kill()
@@ -84,9 +70,7 @@ def gameLoop():
         
         #* Si un proyectil golpea a un enemigo, el proyectil y el enemigo mueren
         pygame.sprite.groupcollide(player.projectiles, enemies, True, True)
-        
-        pygame.display.flip()
-        
+                
         # iteramos sobre cada evento en la cola
         for event in pygame.event.get():
             # se presiono una tecla?
@@ -110,4 +94,4 @@ def gameLoop():
                 player.shoot(pygame.mouse.get_pos())
 
         clock.tick(40)
-        
+        pygame.display.flip()
