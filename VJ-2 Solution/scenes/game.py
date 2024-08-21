@@ -5,7 +5,7 @@ este modulo manejara la escena donde ocurre nuestro juego
 
 import pygame
 
-from pygame.locals import (K_ESCAPE, KEYDOWN, QUIT)
+from pygame.locals import (K_ESCAPE, KEYDOWN, QUIT, RLEACCEL)
 
 from elements.jorge import Player
 
@@ -16,6 +16,7 @@ def gameLoop():
     ''' iniciamos los modulos de pygame'''
 
     pygame.init()
+    pygame.mixer.init()
 
     ''' Creamos y editamos la ventana de pygame (escena) '''
     ''' 1.-definir el tamaño de la ventana'''
@@ -42,13 +43,20 @@ def gameLoop():
     enemies = pygame.sprite.Group()
     all_sprites = pygame.sprite.Group()
     all_sprites.add(player)
+    ''' 5- Disparos''' #*
+    piu = pygame.mixer.Sound('assets/blaster.mp3') # Sonido de disparo
+    
+    # Cambiar el cursor por una imagen
+    pygame.mouse.set_visible(False)
+    cursor_img = pygame.image.load("assets/crosshair.png").convert_alpha()
+    cursor_img = pygame.transform.scale(cursor_img, (35, 35))
+    cursor_img_rect = cursor_img.get_rect()
 
     ''' hora de hacer el gameloop '''
     # variable booleana para manejar el loop
     running = True
 
     # loop principal del juego
-
     while running:
 
         screen.blit(background_image, [0, 0])
@@ -61,15 +69,16 @@ def gameLoop():
         
         pressed_keys = pygame.key.get_pressed()
         player.update(pressed_keys)
+        
         #* Actualiza los proyectiles
         player.projectiles.update()
         enemies.update()
         
-        # // if pygame.sprite.spritecollideany(player, enemies):
-        # //     player.kill()
-        # //     running = False
-        # * Se verifica si la mascara del jugador colisiona con la mascara de los enemigos
-        if pygame.sprite.spritecollideany(player, enemies, pygame.sprite.collide_mask):
+        #* Dibuja el cursor del mouse
+        cursor_img_rect.center = pygame.mouse.get_pos()
+        screen.blit(cursor_img, cursor_img_rect)
+        
+        if pygame.sprite.spritecollideany(player, enemies):
             player.kill()
             running = False
         
@@ -97,6 +106,7 @@ def gameLoop():
             
             #* Dispara un proyectil si el usuario hace click
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.mixer.Sound.play(piu) #* Reproduce el sonido de disparo
                 player.shoot(pygame.mouse.get_pos())
 
         clock.tick(40)
